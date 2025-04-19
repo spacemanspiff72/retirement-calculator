@@ -1,0 +1,99 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Retirement Calculator</h1>
+        
+        <form id="calculator-form">
+            <div class="form-section">
+                <h2>Personal Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="current_age">Current Age</label>
+                        <input type="number" id="current_age" name="current_age" min="18" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="retirement_age">Retirement Age</label>
+                        <input type="number" id="retirement_age" name="retirement_age" min="40" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="death_age">Life Expectancy</label>
+                        <input type="number" id="death_age" name="death_age" min="50" max="120" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h2>Financial Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="current_savings">Current Savings ($)</label>
+                        <input type="number" id="current_savings" name="current_savings" min="0" step="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pre_pension_years">Pre-Pension Years</label>
+                        <input type="number" id="pre_pension_years" name="pre_pension_years" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="annual_contribution">Annual Contribution ($)</label>
+                        <input type="number" id="annual_contribution" name="annual_contribution" min="0" step="1000" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="desired_spend">Desired Annual Spending ($)</label>
+                        <input type="number" id="desired_spend" name="desired_spend" min="0" step="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="annual_return">Expected Return (%)</label>
+                        <input type="number" id="annual_return" name="annual_return" min="0" max="20" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inflation_rate">Inflation Rate (%)</label>
+                        <input type="number" id="inflation_rate" name="inflation_rate" min="0" max="10" step="0.1" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="legacy_percent">Legacy % of Initial Wealth</label>
+                        <input type="number" id="legacy_percent" name="legacy_percent" min="0" max="100" step="1" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-action">
+                <button type="submit" class="calculate-btn">Calculate Retirement Plan</button>
+            </div>
+        </form>
+        
+        <div id="results" class="hidden">
+            <div class="results-section">
+                <h2>Retirement Projection</h2>
+                <div class="chart-container">
+                    <canvas id="savingsChart"></canvas>
+                </div>
+                
+                <div class="summary-container">
+                    <h3>Summary</h3>
+                    <div id="summary-data" class="summary-grid"></div>
+                </div>
+                
+                <div class="monte-carlo-section">
+                    <h3>Monte Carlo Analysis</h3>
+                    <div id="monte-carlo-data" class="summary-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/calculator.js') }}"></script>
+</body>
+</html>
